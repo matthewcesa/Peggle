@@ -1,9 +1,11 @@
-package model;
+package model.model;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import view.Image;
-public abstract class Obstacle extends Objet{
+
+import model.model.Objet;
+import model.view.Image;
+public abstract class Obstacle extends Objet {
 
     protected boolean estMort; 
     protected int vie;

@@ -1,13 +1,17 @@
-package view;
+package model.view;
 
-import controller.Controleur;
-import controller.Edit;
-import controller.Sauvegarde;
+import model.controller.Controleur;
+import model.controller.Edit;
+import model.controller.Sauvegarde;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
-import model.*;
+
+import model.model.Balle;
+import model.model.Niveau;
+import model.model.Obstacle;
+import model.model.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,7 +23,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Timer;
 import java.util.ArrayList;
-import java.awt.Image;
 
 import javax.sound.sampled.*;
 public class View extends JFrame {
@@ -37,7 +40,7 @@ public class View extends JFrame {
     public static boolean enJeu = true;
     public boolean balleEnJeu = false;
     public double angle;
-    public String chemin = System.getProperty("user.dir") + "/ressources/";
+    public String chemin = System.getProperty("user.dir") + "Peggle/src/model/ressources/";
     public Timer timer;
     
     public int directionX = 5;
@@ -81,7 +84,7 @@ public class View extends JFrame {
             @Override
             public void paintComponent(Graphics g) {
                 try {
-                    BufferedImage image = ImageIO.read(new File("ressources/image_acceuil1.png"));
+                    BufferedImage image = ImageIO.read(new File("Peggle/src/model/view/ressources/image_acceuil1.png"));
                     super.paintComponent(g);
                     g.drawImage(image,0, 0,width,height, null);
                 }catch(Exception e){
@@ -101,7 +104,7 @@ public class View extends JFrame {
         jouer.setBounds(width/2 - width/10/2, height - height/5, width/10, height/10);
         pane.add(jouer);
         jouer.addActionListener(e -> {
-            son.stop();
+            stopMusic();
             changerPanel(choixJoueur());
         });
         pane.setBackground(Color.lightGray);
@@ -149,19 +152,19 @@ public class View extends JFrame {
 
 
         start.addActionListener(e -> {
-            son.stop();
+            stopMusic();
             controleur.modele.getPlayer().setPseudo(nameField.getText());
             Sauvegarde.save(controleur.modele.getPlayer());
             changerPanel(choixNiveauPane(controleur));
         });
 
         edit.addActionListener(e -> {
-            son.stop();
+            stopMusic();
             controleur.modele.getPlayer().setPseudo(nameField.getText());
             changerPanel(choixEdit());
         });
         choixJoueur.addActionListener(e -> {
-            son.stop();
+            stopMusic();
             controleur.modele.getPlayer().setPseudo(nameField.getText());
             Sauvegarde.save(controleur.modele.getPlayer());
             changerPanel(choixJoueur());
@@ -211,9 +214,9 @@ public class View extends JFrame {
         partie.setLayout(null);
 
         ImageIcon icon = new ImageIcon(chemin + "puit.png");
-        Image image = icon.getImage();
-        Image nouvelleImage = image.getScaledInstance(icon.getIconWidth() * 2, icon.getIconHeight() * 2,
-                Image.SCALE_SMOOTH);
+        java.awt.Image image = icon.getImage();
+        java.awt.Image nouvelleImage = image.getScaledInstance(icon.getIconWidth() * 2, icon.getIconHeight() * 2,
+                java.awt.Image.SCALE_SMOOTH);
         ImageIcon nouvelleIcone = new ImageIcon(nouvelleImage);
         puit = new JLabel(nouvelleIcone);
         puit.setSize(new Dimension(partie.getWidth() / 8, nouvelleIcone.getIconHeight()));
@@ -367,7 +370,7 @@ public class View extends JFrame {
             @Override
             public void paintComponent(Graphics g) {
                 try {
-                    BufferedImage image = ImageIO.read(new File("ressources/image_niveaux.png"));
+                    BufferedImage image = ImageIO.read(new File("Peggle/src/model/ressources/view/ressources/image_niveaux.png"));
                     super.paintComponent(g);
                     g.drawImage(image,0, 0,width,height, null);
                 }catch(Exception e){
@@ -432,7 +435,7 @@ public class View extends JFrame {
 
         precedent.addActionListener(e -> {
             this.invalidate();
-            son.stop();
+            stopMusic();
             changerPanel(menuPrincipal());
         });
         afficheMiniature(1, choixNiv);
@@ -491,7 +494,7 @@ public class View extends JFrame {
                 int niv = controleur.modele.getNiveau().getNumNiveau() + 1;
                 fondEcran = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
                 try {
-                    fondEcran = ImageIO.read(new File("ressources/Niveau"+niv+"Fond.png"));
+                    fondEcran = ImageIO.read(new File("Peggle/src/model/view/ressources/Niveau"+niv+"Fond.png"));
                 } catch (IOException excep) {
                     excep.printStackTrace();
                 }
@@ -509,7 +512,7 @@ public class View extends JFrame {
             niveauSuiv_retry.addActionListener(e->{
                 fondEcran = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
                 try {
-                    fondEcran = ImageIO.read(new File("ressources/Niveau"+controleur.modele.getNiveau().getNumNiveau()+"Fond.png"));
+                    fondEcran = ImageIO.read(new File("Peggle/src/model/view/ressources/Niveau"+controleur.modele.getNiveau().getNumNiveau()+"Fond.png"));
                 } catch (IOException excep) {
                     excep.printStackTrace();
                 }
@@ -582,7 +585,7 @@ public class View extends JFrame {
                     if(fondEcran == null){
                         setBackground(Color.gray);
                     }
-                    g2d.drawImage(view.Image.fondEcrans[Math.min(k,4)],0, 0,getWidth(),getHeight(),null);
+                    g2d.drawImage(Image.fondEcrans[Math.min(k,4)],0, 0,getWidth(),getHeight(),null);
                     
                     if (mode != 1) {
                         dessineNiveau(g, Sauvegarde.charge(k));
@@ -616,7 +619,7 @@ public class View extends JFrame {
                             numNiveau = k + 1;
                             fondEcran = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
                             try {
-                                fondEcran = ImageIO.read(new File("ressources/Niveau"+numNiveau+"Fond.png"));
+                                fondEcran = ImageIO.read(new File("Peggle/src/model/view/ressources/Niveau"+numNiveau+"Fond.png"));
                             } catch (IOException excep) {
                                 // TODO Auto-generated catch block
                                 excep.printStackTrace();
@@ -630,7 +633,7 @@ public class View extends JFrame {
                             controleur.modele.getNiveau().setList(Sauvegarde.charge(k));
                             changerPanel(JeuPanel(this.controleur));
                         }
-                        son.stop();
+                        stopMusic();
                     });
             bis.add(panelPrincipal);
         }
@@ -693,7 +696,7 @@ public class View extends JFrame {
                 (ActionEvent e) -> {
                     Sauvegarde.joueur = k;
                     controleur.modele.setPlayer(Sauvegarde.listeJoueurs.get(Sauvegarde.joueur));
-                    son.stop();
+                    stopMusic();
                     changerPanel(menuPrincipal());
             });
 
@@ -715,12 +718,9 @@ public class View extends JFrame {
             pane.add(choix,BorderLayout.WEST);
             pane.add(info,BorderLayout.CENTER);
             info.add(supprimer);
-// <<<<<<< HEAD
             info.setBackground(Color.lightGray);
             
-// =======
 
-// >>>>>>> develop
             bis.add(pane);
             supprimer.setBounds(principal.getWidth() - 150, 0, 50, 50);
         }
@@ -778,7 +778,7 @@ public class View extends JFrame {
 
         BufferedImage img = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
         try {
-            img = ImageIO.read(new File("ressources/roue.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/roue.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -831,7 +831,7 @@ public class View extends JFrame {
         // g2d.draw(arc2);
 
         try {
-            img = ImageIO.read(new File("ressources/canon.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/canon.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -873,7 +873,7 @@ public class View extends JFrame {
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         Graphics2D g2d = (Graphics2D) g;
-                        g2d.drawImage(view.Image.boulet, xMun, yMun, 2 * yMun, 2 * yMun, null);
+                        g2d.drawImage(Image.boulet, xMun, yMun, 2 * yMun, 2 * yMun, null);
                     }
                 };
             }
@@ -953,6 +953,12 @@ public class View extends JFrame {
         }
     }
 
+    public static void stopMusic() {
+        if (son != null && son.isRunning()) {
+            son.stop();
+        }
+    }
+
     public void addExplosion(double x, double y,int point) {
         partie.add(new Explosion(x * ratioX, y * ratioY,point,this));
     }
@@ -987,8 +993,8 @@ public class View extends JFrame {
         btnMute.setBounds(width-75,0,75,75);
         panel.add(btnMute);
         btnMute.addActionListener(e->{
-            if(son.isActive()) {
-                son.stop();
+            if(son != null && son.isActive()) {
+                stopMusic();
                 sonMute = true;
             }else {
                 LancerMusic(url);

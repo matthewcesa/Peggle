@@ -1,4 +1,9 @@
-package model;
+package model.model;
+
+import model.model.Obstacle;
+import model.model.Pegs;
+import model.model.Quadrilatere;
+
 import java.util.ArrayList;
 public class Niveau {
 

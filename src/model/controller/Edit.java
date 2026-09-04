@@ -1,4 +1,4 @@
-package controller;
+package model.controller;
 
 import java.util.ArrayList;
 
@@ -11,11 +11,11 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.UndoManager;
 import java.awt.event.MouseAdapter;
-import model.Niveau;
-import model.Obstacle;
-import model.Pegs;
-import model.Quadrilatere;
-import view.View;
+import model.model.Niveau;
+import model.model.Obstacle;
+import model.model.Pegs;
+import model.model.Quadrilatere;
+import model.view.View;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.*;

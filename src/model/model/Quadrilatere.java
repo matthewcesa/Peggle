@@ -1,8 +1,10 @@
-package model;
+package model.model;
 import java.awt.*;
-import view.Image;
 
-import view.View;
+import model.model.Obstacle;
+import model.view.Image;
+
+import model.view.View;
 public class Quadrilatere extends Obstacle {//peut etre un carré comme un rectangle
     int typeCollision = 0;
     public Point coinHautGauche, coinBasGauche, coinHautDroit, coinBasDroit;

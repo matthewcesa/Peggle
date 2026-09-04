@@ -1,4 +1,4 @@
-package view;
+package model.view;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -19,7 +19,7 @@ public class Explosion extends JPanel {
     public int point;
     public View view;
 
-    public Explosion(double x, double y,int point,View view) {
+    public Explosion(double x, double y, int point, View view) {
         this.x = x;
         this.y = y;
         this.radius = 0;

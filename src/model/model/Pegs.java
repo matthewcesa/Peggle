@@ -1,10 +1,11 @@
-package model;
+package model.model;
 import java.awt.*;
 import java.util.Random;
 
-import view.View;
-import view.Image;
-public class Pegs extends Obstacle{
+import model.model.Obstacle;
+import model.view.View;
+import model.view.Image;
+public class Pegs extends Obstacle {
     private int rayon = 25;
     public Pegs(){
         super(1);

@@ -1,13 +1,10 @@
-package model;
+package model.model;
 
-// <<<<<<< HEAD
-import java.security.cert.PolicyNode;
 
-// =======
-// >>>>>>> c5a9c2ceeaf8ecceb146cb5b82ac83b3c1cdb4b5
 import java.io.Serializable;
 import java.util.ArrayList;
-import controller.Sauvegarde;
+import model.controller.Sauvegarde;
+
 public class Player implements Serializable{
     public int score;
     public String pseudo;
@@ -43,10 +40,7 @@ public class Player implements Serializable{
             pointGagneParBalleEnJeu -= 5;
         }
         return pointGagneParBalleEnJeu;
-// <<<<<<< HEAD
         
-// =======
-// >>>>>>> c5a9c2ceeaf8ecceb146cb5b82ac83b3c1cdb4b5
     }
     public String getPseudo(){
         return this.pseudo;
@@ -60,12 +54,9 @@ public class Player implements Serializable{
                 listeScore[i] = score;
             } 
         }else{
-// <<<<<<< HEAD
-// =======
-            if(listeScoreEdit.size() < Sauvegarde.numNiveau){
+            while(listeScoreEdit.size() <= Sauvegarde.numNiveau){
                 listeScoreEdit.add(0);
             }
-// >>>>>>> c5a9c2ceeaf8ecceb146cb5b82ac83b3c1cdb4b5
             if( score > listeScoreEdit.get(Sauvegarde.numNiveau)){
                 listeScoreEdit.set(Sauvegarde.numNiveau, score);
             } 

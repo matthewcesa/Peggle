@@ -1,4 +1,4 @@
-package view;
+package model.view;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -16,7 +16,7 @@ public class Image {
     public Image(){
         BufferedImage img = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
         try {
-            img = ImageIO.read(new File("ressources/pegBleu.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/pegBleu.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -24,7 +24,7 @@ public class Image {
         pegRondBleu = img;
 
         try {
-            img = ImageIO.read(new File("ressources/pegRose.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/pegRose.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -32,28 +32,28 @@ public class Image {
         pegRondRose = img;
 
         try {
-            img = ImageIO.read(new File("ressources/pegRouge.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/pegRouge.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         pegRondRouge = img;
         try {
-            img = ImageIO.read(new File("ressources/quadHorizontal.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/quadHorizontal.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         quadHorizontal = img;
         try {
-            img = ImageIO.read(new File("ressources/quadVertical.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/quadVertical.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         quadVertical = img;
         try {
-            img = ImageIO.read(new File("ressources/boulet.png"));
+            img = ImageIO.read(new File("Peggle/src/model/view/ressources/boulet.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -61,7 +61,7 @@ public class Image {
         boulet = img;    
         for (int i = 0; i < fondEcrans.length; i++) {
             try {
-                img = ImageIO.read(new File("ressources/Niveau"+(i+1)+"Fond.png"));
+                img = ImageIO.read(new File("Peggle/src/model/view/ressources/Niveau"+(i+1)+"Fond.png"));
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

@@ -1,8 +1,12 @@
-package controller;
+package model.controller;
 
-import view.*;
+import model.model.Balle;
+import model.model.Modele;
+import model.model.Niveau;
+import model.model.Pegs;
+import model.view.Image;
+import model.view.View;
 import javax.swing.*;
-import model.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,23 +47,6 @@ public class Controleur {
                     modele.getBalle().update();
                     // rebond
                     for (int i = 0; i < modele.niveau.list.size(); i++) {
-// <<<<<<< HEAD
-//                         // if (modele.niveau.list.get(i) instanceof Pegs) {
-//                             if (modele.niveau.list.get(i).rebond(modele.getBalle())) {
-//                                 view.bruitage("ressources/SonsWav/rebond.wav");
-//                                 modele.niveau.list.get(i).perdDeLaVie(1);
-//                                 boolean detruit = modele.niveau.list.get(i).getEstMort();
-//                                 if (detruit) {
-//                                     double x = modele.niveau.list.get(i).getX();
-//                                     double y = modele.niveau.list.get(i).getY();
-//                                     view.addExplosion(x, y);
-//                                     modele.niveau.list.remove(i);
-//                                 }
-//                                 modele.player.calculScore(detruit, facteur++,balleEnJeu);
-//                                 view.setScore();
-//                             }
-//                         // }
-// =======
                         if(!modele.niveau.list.get(i).getEstMort()){
                             if (modele.niveau.list.get(i).rebond(modele.getBalle()) && modele.niveau.list.get(i) instanceof Pegs) {
                                 view.bruitage("ressources/SonsWav/rebond.wav");

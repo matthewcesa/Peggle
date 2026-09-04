@@ -1,9 +1,9 @@
-package model;
+package model.model;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import view.Image;
-import view.View;
+import model.view.Image;
+import model.view.View;
 public class Balle {
 
   public double x;

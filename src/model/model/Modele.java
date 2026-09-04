@@ -1,4 +1,8 @@
-package model;
+package model.model;
+
+import model.model.Niveau;
+import model.model.Obstacle;
+import model.model.Player;
 
 public class Modele {
 
